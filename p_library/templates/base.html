@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <nav>
+        <ul class='nav__menu'>
+            <a href="{% url 'books' %}">Книги</a>
+            <a href="{% url 'p_library:author' %}">Авторы</a>
+            <a href="{% url 'publish' %}">Издательства</a>
+            <a href="{% url 'add-book' %}">Добавить книгу</a>
+        </ul>
+    </nav>
+    <div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>
