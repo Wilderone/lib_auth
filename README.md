@@ -1,7 +1,9 @@
-Login to admin: SF
+cd my_site
+python manage.py runserver
+/admin :
+Login to admin: sf
 Password: 123
-route for check: /publish
-см. views.py
 
 
-Book.objects.all().filter(debeter=Friend.objects.all().filter(full_name='Friend1').first())
+
+
