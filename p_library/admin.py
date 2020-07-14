@@ -1,6 +1,12 @@
 from django.contrib import admin
 from p_library.models import Book, Author, Publishing, Friend, Exchange
+from allauth.socialaccount.models import SocialAccount
 # Register your models here.
+
+
+# @admin.register(SocialAccount)
+# class SocialAccounts(admin.ModelAdmin):
+#     pass
 
 
 @admin.register(Book)

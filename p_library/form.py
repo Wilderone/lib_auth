@@ -1,6 +1,21 @@
 from django import forms
 from p_library.models import Author, Book
 from django.forms import formset_factory
+from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.forms import User
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+
+class SocialAccountForm(forms.ModelForm):
+
+    class Meta:
+        model = SocialAccount
+        fields = '__all__'
 
 
 class AuthorForm(forms.ModelForm):

@@ -28,7 +28,9 @@ urlpatterns = [
     path('book_decrement/', views.book_decrement),
     path('publish/', views.show_publishings, name='publish'),
     path('author/', include('p_library.urls'), name='author'),
-    path('add_book/', views.BookCreate.as_view(), name='add-book')
+    path('add_book/', views.BookCreate.as_view(), name='add-book'),
+
+    path('accounts/', include('allauth.urls')),
 
 ]
 

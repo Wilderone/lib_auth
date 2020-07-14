@@ -16,10 +16,30 @@
             <a href="{% url 'books' %}">Книги</a>
             <a href="{% url 'p_library:author' %}">Авторы</a>
             <a href="{% url 'publish' %}">Издательства</a>
+
+
+            {% if user.username  %}
             <a href="{% url 'add-book' %}">Добавить книгу</a>
+
+            {% else %}
+            <div class="login-grp">Для добавления книги надо <a href="{% url 'p_library:login' %}">Войти</a></div>
+
+            {% endif %}
+
         </ul>
     </nav>
+    <div class="welcome">
+        Hi {{user}}.
+
+        {% if  user.username %}
+        <a href="{% url 'p_library:profile' %}">Профиль</a>
+        <a href="{% url 'p_library:logout' %}">Выйти</a>
+
+
+        {% endif %}
+    </div>
     <div>
+
 
         {% block content %}
         {% endblock %}

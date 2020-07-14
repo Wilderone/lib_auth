@@ -2,15 +2,40 @@ from django.http import HttpResponse
 from django.template import loader
 from p_library.models import Book, Author, Publishing
 from django.shortcuts import render, redirect
-from p_library.form import AuthorForm, BookForm
-from django.views.generic import CreateView, ListView
+from p_library.form import AuthorForm, BookForm, SocialAccountForm, UserForm
+from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
 from django.http.response import HttpResponseRedirect
+from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.models import User
+
+
 import pdb
 
 
 # Create your views here.
+
+
+def profilePage(request):
+    context = {}
+    if request.method == "POST":
+        print("POST", request)
+    if request.user.is_authenticated:
+
+        context['username'] = request.user.username
+        print('REQEST USER', request.user)
+        try:
+            context['extra'] = SocialAccount.objects.get(
+                provider='github', user=request.user).extra_data
+        except:
+
+            context['user'] = User.objects.get(username=request.user.username)
+            print(context['user'].first_name)
+
+    return render(request, 'profile.html', context)
+
+
 def books_authors_create_many(request):
     AuthorFormSet = formset_factory(AuthorForm, extra=2)
     BookFormSet = formset_factory(BookForm, extra=2)
@@ -72,7 +97,7 @@ def books_list(request):
 
 def index(request):
     template = loader.get_template('index.html')
-
+    print('INDEX', request.user.username)
     books = Book.objects.all()
     books_list = [i for i in books]
     biblio_data = {'title': 'My library',
